@@ -11,7 +11,7 @@ const UNWRAP_ERR = "Option is 'None' during unwrap";
 }
 
 @final export class Option<T> {
-  private value: T = changetype<T>(0);
+  public value: T = changetype<T>(0);
   private none: bool = false;
 
   constructor(value: T, none: bool) {
@@ -23,11 +23,11 @@ const UNWRAP_ERR = "Option is 'None' during unwrap";
     }
   }
 
-  isRef(): bool {
+  get isRef(): bool {
     return isReference<T>();
   }
 
-  isNone(): bool {
+  get isNone(): bool {
     if (isReference<T>()) {
       return changetype<usize>(this) == 0;
     } else {
@@ -35,7 +35,7 @@ const UNWRAP_ERR = "Option is 'None' during unwrap";
     }
   }
 
-  isSome(): bool {
+  get isSome(): bool {
     if (isReference<T>()) {
       return changetype<usize>(this) != 0;
     } else {
@@ -123,5 +123,25 @@ const UNWRAP_ERR = "Option is 'None' during unwrap";
     } else {
       return !this.none ? this : other;
     }
+  }
+
+  @inline @operator("==")
+  eq(other: Option<T>): bool {
+    if (isReference<T>()) {
+      return changetype<usize>(this) == changetype<usize>(other);
+    } else {
+      if (this.none && other.isNone) {
+        return true;
+      } else if (!this.none && other.isSome) {
+        return this.value == other.value;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  @inline @operator("!=")
+  ne(other: Option<T>): bool {
+    return !this.eq(other);
   }
 }

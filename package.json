@@ -12,11 +12,9 @@
   "ascMain": "assembly/index.ts",
   "main": "assembly/index.ts",
   "scripts": {
-    "asbuild:debug": "asc assembly/index.ts --target debug",
-    "asbuild:release": "asc assembly/index.ts --target release",
-    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "test": "node tests",
-    "start": "npx serve ."
+    "build:debug": "asc assembly/index.ts --target debug",
+    "build:release": "asc assembly/index.ts --target release",
+    "build": "npm run build:debug && npm run build:release"
   },
   "repository": {
     "type": "git",
