@@ -5,7 +5,7 @@ Option
 
 _Work In Progress_
 
-Zero cost abstraction for `Option<T>` type. This abstraction is completely free for reference types, while other types that cannot yet be nullable such as `bool`, `i32` or `f64` will be wrapped in the class.
+Zero cost abstraction for optional container (`Option<T>`). This abstraction is completely free for reference types, while other types that cannot yet be nullable such as `bool`, `i32` or `f64` will be wrapped in the class.
 
 ### Usage
 
@@ -31,5 +31,5 @@ function getDefaultInt(input: Option<i32>): i32 {
 
 ## TODO
 
-- [ ] support zero cost for types `sizeof<T>() < 32`
-- [ ] tests
+- [ ] Support zero cost for types with `sizeof<T>()` <= 16
+- [ ] Tests
