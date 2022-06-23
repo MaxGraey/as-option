@@ -1,3 +1,5 @@
+[![NPM registry](https://img.shields.io/npm/v/as-option.svg?style=for-the-badge)](https://www.npmjs.com/package/as-option)[![NPM license](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE.md)
+
 Option
 ===
 
