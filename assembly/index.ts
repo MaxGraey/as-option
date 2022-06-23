@@ -1,3 +1,15 @@
+const UNWRAP_ERR = "Option is 'None' during unwrap";
+
+// @ts-ignore: decorator
+@inline export function Some<T>(value: T): Option<T> {
+  return new Option<T>(value, false);
+}
+
+// @ts-ignore: decorator
+@inline export function None<T>(): Option<T> {
+  return new Option<T>(changetype<T>(0), true);
+}
+
 @final export class Option<T> {
   private value: T = changetype<T>(0);
   private none: bool = false;
@@ -33,10 +45,10 @@
 
   unwrap(): T {
     if (isReference<T>()) {
-      if (changetype<usize>(this) == 0) throw new Error("None");
+      if (changetype<usize>(this) == 0) throw new Error(UNWRAP_ERR);
       return changetype<T>(this);
     } else {
-      if (this.none) throw new Error("None");
+      if (this.none) throw new Error(UNWRAP_ERR);
       return this.value;
     }
   }
@@ -112,14 +124,4 @@
       return !this.none ? this : other;
     }
   }
-}
-
-// @ts-ignore: decorator
-@inline export function Some<T>(value: T): Option<T> {
-  return new Option<T>(value, false);
-}
-
-// @ts-ignore: decorator
-@inline export function None<T>(): Option<T> {
-  return new Option<T>(changetype<T>(0), true);
 }
